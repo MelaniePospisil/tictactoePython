@@ -51,12 +51,22 @@ class TikTakToe:
                 self.turn = " X "
             self.print_game()
             print("  ")
-        print("It's " + self.turn +"'s turn")
-        print(" ")
-        cell = int(input("So my dear " + self.turn + ", which cell do you want? "))
-        self.set(cell)
-        print(" ")
+        #Check, if game is already won
+        if self.check_for_win() != "no":
+            print("STOP! " + self.check_for_win() + " won! Wohooooooo")
+        else:
+            print("It's " + self.turn +"'s turn")
+            print(" ")
+            cell = int(input("So my dear " + self.turn + ", which cell do you want? "))
+            self.set(cell)
+            print(" ")
 
+    def check_for_win(self):
+        winning_lines = [[1,2,3], [1,5,9], [1,4,7], [2,5,8], [4,5,6], [3,6,9], [3,5,7]]
+        for line in winning_lines:
+            if self.field[line[0]-1] == self.field[line[1]-1] and self.field[line[0]-1] == self.field[line[2]-1]:
+                return self.field[line[0]]
+        return "no"
     
 game_1 = TikTakToe()
 
